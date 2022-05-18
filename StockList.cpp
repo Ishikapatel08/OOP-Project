@@ -6,7 +6,7 @@
 #include <cassert>
 using namespace std;
 
-
+//STOCKS THEY CAN BUY AND SELL, DATABSE FOR THE STOCKS/ SHARES
 
 template <class elemType>
 

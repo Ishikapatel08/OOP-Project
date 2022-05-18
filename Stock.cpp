@@ -4,6 +4,8 @@
 
 using namespace std;
 
+//WE INCLUDE INFORMATION ABOUT DAY TO DAY TRANSACTION, GENERAL ACCOUNT INFORMATION 
+
 
 //default constructor
 TypeofStock::TypeofStock(){
