@@ -1,19 +1,19 @@
-MAKEFILE
-all: tests project
+#MAKEFILE
+all: project
 
-project: main.o
-    g++ main.o Market.o StockList.o Stock.o -o project
+project: Market.o StockList.o Stock.o main.cpp
+	g++ main.cpp Market.o StockList.o Stock.o -o project
 
 Market.o: Market.h Market.cpp
-g++ -c
+	g++ -c
 
 Stock.o: Stock.h Stock.cpp
-g++ -c
+	g++ -c
 
 StockList.o: StockList.cpp StockList.h
-g++ -c
+	g++ -c
 
 
 
 clean:
-    rm -f *.o project
+	rm -f *.o project

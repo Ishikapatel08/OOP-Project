@@ -1,39 +1,160 @@
 #include "Stock.h"
 #include "Market.h"
+#include "StockList.h"
+
+#include <iostream>
+#include <fstream>
+#include iomanip
+using namespace std;
+
+void printFinanceReport();
+int displayMenuPrompt();
+
+void getGainLossArray( Stock MSET,
+                       Stock IBS,
+                       Stock CSCO,
+                       Stock AOLK,
+                       Stock CTR,
+                       double ListArray[] );
 
 int main() {
 
-    stockListType stockList;
+    int MenuPromptOptions;
+    double ListOfGainLoss[5];
+    Market ListOfStocks (5);
+    Stock MSET, IBS, CSCO, AOLK, CTR;
 
-    stockType stockTemp;
+    ifstream infile ("StockMarketList.txt");
+
+    if(!infile){
+
+        cout << "error text file not found." ;
+
+        else{
+            infile >> MSET >> IBS >> CSCO >> AOLK >> CTR;
+
+            CSCO.calcPercentGain();
+            IBS.calcPercentGain();
+            MSET.calcPercentGain();
+            AOLK.calcPercentGain();
+            CTR.calcPercentGain();
+
+            ListOfStock.insertAt(CSCO, 0);
+            ListOfStock.insertAt(IBS, 1);
+            ListOfStock.insertAt(MSET, 2);
+            ListOfStock.insertAt(AOLK, 3);
+            ListOfStock.insertAt(CTR, 4);
+
+            printFinanceReport();
+            ListOfStock.print();
+
+            do{
+
+                MenuPromptOptions = displayMenuPrompt();
+
+                if(MenuPromptOptions == 1) {
+
+                    ListOfStock.SortingGainLoss(ListOfGainLoss);
+
+                    getGainLossArray(MSET, IBS, CSCO, AOLK, CTR, ListOfGainLoss);
+
+                }
+
+                if(MenuPromptOptions == 2) {
+
+                    printFinanceReport();
+                    ListOfStock.sort();
+                    ListOfStock.print();
+                }
 
 
+            } while(MenuPromptOptions != 3);
 
-    stockTemp.setStockInfo("IBD", 68.00, 71.00, 72.00, 67.00, 75.00, 15000);
+        }
 
-    stockList.insertAt(stockTemp, 0);
+    }
 
+    return 0;
 
+}
 
-    stockTemp.setStockInfo("MSET", 120.00, 140.00, 145.00, 140.00, 115.00, 30920);
+void printFinanceReport() {
 
-    stockList.insertAt(stockTemp, 1);
-
-
-
-    stockTemp.setStockInfo("AOLK", 80.00, 75.00, 82.00, 74.00, 83.00, 5000);
-
-    stockList.insertAt(stockTemp, 2);
-
-
-
-    stockTemp.setStockInfo("CSCO", 100.00, 102.00, 105.00, 98.00, 101.00, 25000);
-
-    stockList.insertAt(stockTemp, 3);
+    cout << "******************************************************************************\n"
+         << "******************************************************************************\n\n"
+         << "STOCK                  TODAY                   PREV       PERCENT             \n"
+         << "SYMBOL     OPENING     CLOSING   MAX    MIN    CLOSING    GAIN      VOLUME    \n"
+         << "******************************************************************************\n";
 
 
+}
 
-    stockTemp.setStockInfo("ABC", 123.45, 130.95, 132.00, 125.00, 120.50, 10000);
+int displayMenuPrompt() {
 
-    stockList.insertAt(stockTemp, 4);
+    int MenuPromptOptions;
+
+    do{
+
+        cout << "*************MENU*************" << endl;
+        cout << endl << "1) Sort By Gain / Loss \n";
+        cout << "2) Sort By Symbol \n";
+        cout << "3) Exit \n" << endl';
+
+        cin >> MenuPromptOptions;
+
+        if(MenuPromptOptions == 0 || MenuPromptOptions > 3) {
+
+            cout << setw(30) << "***********************" << endl;
+            cout << setw(30) << "*        ERROR        *" << endl;
+            cout << setw(30) << "***********************" << endl;
+            cout << setw(30) << "*  NOT A VALID ENTRY  *" << endl;
+            cout << setw(30) << "*  ENTER 1 , 2 OR 3!  *" << endl;
+            cout << setw(30) << "***********************" << endl << endl;
+
+        }
+
+    } while (MenuPromptOptions == 0 || MenuPromptOptions > 3);
+
+    return MenuPromptOptions;
+}
+
+void getGainLossArray(Stock MSET,
+                       Stock IBS,
+                       Stock CSCO,
+                       Stock AOLK,
+                       Stock CTR,
+                       double ListArray[] )
+{
+       printFinanceReport();
+
+       int length = 5;
+
+       for(int i = 0; i < length; i++){
+
+           if (MSET.getPercentGain() == ListArray[i]){
+               MSET.printStockInfo();
+               cout << endl << endl;
+           }
+
+           if (IBS.getPercentGain() == ListArray[i]){
+               IBS.printStockInfo();
+               cout << endl << endl;
+           }
+
+           if (CSCO.getPercentGain() == ListArray[i]){
+               CSC0.printStockInfo();
+               cout << endl << endl;
+           }
+
+           if (AOLK.getPercentGain() == ListArray[i]){
+               AOLK.printStockInfo();
+               cout << endl << endl;
+           }
+
+           if (CTR.getPercentGain() == ListArray[i]){
+               CTR.printStockInfo();
+               cout << endl << endl;
+           }
+
+       }
 }

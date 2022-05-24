@@ -2,38 +2,40 @@
 #define STOCK_H
 
 #include <iostream>
-#include <string>
+#include <cstring>
+#include <fstream>
+#include <cstdlib>
 using namespace std;
 
 class Stock {
 
+    friend ostream& operator << {ostream&, const stockType&};
+    friend istream& operator >> {istream&, stockType};
+
     public:
-            void StockInfo(newString symbol, double OpeningPrice, double ClosingPrice, double Max, double Min, double preClosing, int shares);
 
-            newString getsymbol();
+            Stock();
+            void printStockInfo();
+            void displayPrices();
+            void calcPercentGain();
+            void displayVolume();
+            double getPercentGain();
 
-            double PercentageDifference();
-            double getOpeningPrice();
-            double getClosingPrice();
-            double MaxPrice();
-            double MinPrice();
-            double previousPrice();
+            int operator> {const stockType&} const;
+            int operator< {const stockType&} const;
+            int operator== {const stockType&} const;
+            int operator!= {const stockType&} const;
 
-            int NoShares();
-
-
-            TypeOfStock();
-            TypeOfStock(newString symbol, double OpeningPrice, double ClosingPrice, double Max, double Min, double preClosing, int shares);
 
     private:
-            newString stockSymbol;
-            double TodayOpeningPrice;
-            double TodayClosingPrice;
-            double TodayMax;
-            double TodayMin;
-            double YesterdayClosing;
-            double getPercentDifference;
+            string stockSymbol;
+            double OpeningPrice;
+            int volume;
+            double ClosingPrice;
+            double MaxPrice;
+            double MinPrice;
+            double PrevPrice;
+            double PercentGain;
 
-            int NoOfShares;
 }
 #endif;

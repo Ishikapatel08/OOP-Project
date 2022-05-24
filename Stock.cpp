@@ -4,117 +4,108 @@
 
 using namespace std;
 
-//WE INCLUDE INFORMATION ABOUT DAY TO DAY TRANSACTION, GENERAL ACCOUNT INFORMATION 
+//WE INCLUDE INFORMATION ABOUT DAY TO DAY TRANSACTION, GENERAL ACCOUNT INFORMATION
 
 
-//default constructor
-TypeofStock::TypeofStock(){
+ostream& operator << (ostream& os, const stockType& st) {
 
-    stockSymbol = "***";
-    TodayOpeningPrice = 0.00;
-    TodayClosingPrice = 0.00;
-    TodayMaxPrice = 0.00;
-    TodayMinPrice = 0.00;
-    YesterdayClosing = 0.00;
-    NoOfShares = 0;
-}
+    os << st.stockSymbol << " "
+    << st.OpeningPrice << " "
+    << st.ClosingPrice << " "
+    << st.MaxPrice << " "
+    << st.MinPrice << " "
+    << st.PrevPrice << " "
+    << st.PercentGain << " "
+    << st.volume;
 
-
-//constructor
-TypeofStock::TypeofStock(newString symbol, double OpeningPrice, double ClosingPrice, double Max, double Min, double preClosing, int shares) {
-
-   StockInfo (symbol, OpeningPrice, ClosingPrice, Max, Min, preClosing, shares);
-}
-
-//set the information for each stock
-void StockInfo(newString symbol, double OpeningPrice, double ClosingPrice, double Max, double Min, double preClosing, int shares){
-
-    stockSymbol = symbol;
-    TodayOpeningPrice = OpeningPrice;
-    TodayClosingPrice = ClosingPrice;
-    TodayMaxPrice = Max;
-    TodayMinPrice = Min;
-    YesterdayClosing = preClosing;
-    NoOfShares = shares;
+return os;
 
 }
 
+istream& operator << (istream& is, const stockType& st) {
 
-newString getSymbol(){
+    is << st.stockSymbol
+    << st.OpeningPrice
+    << st.ClosingPrice
+    << st.MaxPrice
+    << st.MinPrice
+    << st.PrevPrice
+    << st.PercentGain
+    << st.volume;
 
-    return stockSymbol;
-}
-
-
-double PercentageDifference(){
-
-    getPercentDifference = ((TodayClosingPrice - YesterdayClosing) / YesterdayClosing) * 100;
-    return getPercentDifference;
-}
-
-double getOpeningPrice(){
-
-    return TodayOpeningPrice;
+return is;
 
 }
 
-double getClosingPrice(){
+Stock::Stock(){
 
-    return TodayClosingPrice;
+    stockSymbol = " ";
+    OpeningPrice = 0.0;
+    ClosingPrice = 0.0;
+    MaxPrice = 0.0;
+    MinPrice = 0.0;
+    PrevClosing = 0.0;
+    PercentGain = 0.0;
+    volume = 0;
 }
 
-double MaxPrice(){
+void Stock::printStockInfo(){
 
-    return TodayMaxPrice;
+    cout << fixed << showpoint;
+    cout << setprecision(2);
+    cout << setw(5) << stockSymbol <<setw(5)
+    << setw(10) << OpeningPrice <<setw(5)
+    << setw(10) << ClosingPrice <<setw(10)
+    << setw(10) << MaxPrice <<setw(10)
+    << setw(10) << MinPrice <<setw(10)
+    << setw(10) << PrevPrice <<setw(10);
+
+    cout << setprecision(2) << PercentGain << "%" << setw(10);
+    cout << setw(10) << volume;
+
 }
 
-double MinPrice(){
+void Stock::displayPrices(){
 
-    return TodayMinPrice;
+    cout << "Opening Price: " << OpeningPrice << endl;
+    cout << "Closing Price: " << ClosingPrice << endl;
+    cout << "Today's Maximum: " << MaxPrice << endl;
+    cout << "Today's Manimum: " << MinPrice << endl;
+    cout << "Previous Closing Price: " << PrevPrice << endl;
+
 }
 
-double previousPrice(){
+void Stock::calcPercentGain(){
 
-    return YesterdayClosing;
+    PercentGain = (ClosingPrice - OpeningPrice)/OpeningPrice * 100;
+
 }
 
-int NoShares(){
+void Stock::displayVolume(){
 
-    return NoOfShares;
+    cout << "Volume: " << volume << endl;
 }
 
-/*
 
-//Overload the relational operators.
-bool stockType::operator==(const newString& rightStr) const{
-
-    return (strcmp(sortIndicesGainLoss, rightStr.sortIndicesGainLoss) == 0);
+int Stock::operator>(const stockType& st) const {
+    return (stockSymbol.compare(st.stockSymbol));
 }
 
-bool stockType::operator<(const newString& rightStr) const{
-
-    return (strcmp(sortIndicesGainLoss, rightStr.sortIndicesGainLoss) < 0);
+int Stock::operator<(const stockType& st) const {
+    return (stockSymbol.compare(st.stockSymbol));
 }
 
-bool stockType::operator<=(const newString& rightStr) const{
-
-    return (strcmp(sortIndicesGainLoss, rightStr.sortIndicesGainLoss) <= 0);
+int Stock::operator==(const stockType& st) const {
+    return (stockSymbol.compare(st.stockSymbol));
 }
 
-bool stockType::operator>(const newString& rightStr) const{
-
-    return (strcmp(sortIndicesGainLoss, rightStr.sortIndicesGainLoss) > 0);
+int Stock::operator>(const stockType& st) const {
+    return (stockSymbol.compare(st.stockSymbol));
 }
 
-bool stockType::operator>=(const newString& rightStr) const{
-
-    return (strcmp(sortIndicesGainLoss, rightStr.sortIndicesGainLoss) >= 0);
+double Stock::getPercentGain(){
+    return PercentGain;
 }
 
-bool stockType::operator!=(const newString& rightStr) const{
-
-    return (strcmp(sortIndicesGainLoss, rightStr.sortIndicesGainLoss) != 0);
-}
-*/
 
 
