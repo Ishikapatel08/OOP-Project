@@ -6,46 +6,32 @@
 #include <cassert>
 using namespace std;
 
-//STOCKS THEY CAN BUY AND SELL, DATABSE FOR THE STOCKS/ SHARES
 
-template <class elemType>
+template < class elemType>
+    bool StockList <elemType> :: isEmpty () const {
+        return (length == 0);
+    }
 
-bool StockList<elemType>::isEmpty() const {
-    return (showLength == 0);
-}
+template < class elemType>
+    bool StockList <elemType> :: isFull () const {
+        return (length == maxSize);
+    }
 
-template <class elemType>
+template < class elemType>
+    int StockList < elemType> :: getLength() const{
+        return length;
 
-bool StockList<elemType>::isFull() const {
-    return (showLength == showMaxSize);
-}
+    }
+template < class elemType>
+    int StockList < elemType> :: getMaxSize() const{
+        return maxSize;
 
-template <class elemType>
+    }
 
-int StockList<elemType>::Length() const {
-    return showLength;
-}
+template < class elemType>
+    StockList< elemType> :: StockList(int size){
 
-template <class elemType>
-
-int StockList<elemType>::MaxSize() const {
-    return showMaxSize;
-}
-
-    //Constructor; the default array size is 50
-template <class elemType>
-
-StockList<elemType>::StockList(string, double, double, double, double, double, int) {
-    showMaxSize = listSize;
-    showLength = 0;
-    List = new elemType[showMaxSize];
-}
-
-template <class elemType>
-//destructor
-StockList<elemType>::~StockList() {
-    delete [] List;
-}
+    }
 
 template <class elemType>
 
@@ -55,23 +41,23 @@ void StockList<elemType>::sort()   //selection sort
     int min;
     elemType temp;
 
-    for (i = 0; i < showLength; i++) {
+    for (i = 0; i < length; i++) {
 
         min = i;
 
-        for (j = i + 1; j < showLength; ++j){
+        for (j = i + 1; j < length; ++j){
 
-            if (List[j] < List[min]){
+            if (list[j] < list[min]){
 
                 min = j;
             }
         }
 
-        temp = List[i];
+        temp = list[i];
 
-        List[i] = List[min];
+        list[i] = list[min];
 
-        List[min] = temp;
+        list[min] = temp;
 
     }//end for
 }//end sort
@@ -81,9 +67,9 @@ void StockList<elemType>::print() const
 {
     int i;
 
-    for (i = 0; i < showLength; ++i)
+    for (i = 0; i < length; ++i)
 
-        cout << List[i] << " ";
+        cout << list[i] << " ";
 
     cout << endl;
 
@@ -93,7 +79,14 @@ template <class elemType>
 
 void StockList<elemType>::insertAt(const elemType& item, int position) {
 
-    assert(position >= 0 && position < showMaxSize);
-    List[position] = item;
-    showLength++;
+    assert(position >= 0 && position < maxSize);
+    list[position] = item;
+    length++;
+}
+
+
+template <class elemType>
+//destructor
+StockList<elemType>::~StockList() {
+    delete [] list;
 }

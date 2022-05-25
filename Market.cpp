@@ -1,35 +1,39 @@
 #include "Market.h"
-#include "Stock.h"
 #include "StockList.h"
+#include "Stock.h"
 
-Market::Market(int size) : StockList<Stock>(size) {
+#include <iostream>
 
-    SortingGainLoss = new double[size];
+template <class elemType>
+Market <elemType>::Market(int size) {
 
-    getMaxSize = size;
-    getLength = 0;
+    sortIndicesGainLoss = new double[size];
+
+    maxSize = size;
+    length = 0;
 
 }
 
-void Market::sortByGain() {
+template <class elemType>
+void Market <elemType>::sortArrayByGain() {
 
-    for(int i = 0; i < getLength; i++){
-        SortingGainLoss[i] = list[i].getPercentGain();
+    for(int i = 0; i < length; i++){
+        sortIndicesGainLoss[i] = list[i].getPercentGain();
     }
 
     double temp;
     int i;
     int index;
 
-    for(i = 1; i < getlength; i++){
+    for(i = 1; i < length; i++){
 
         for(index = 0; index < length - i; index++){
 
-            if(SortingGainLoss[index] < SortingGainLoss[index + 1]){
+            if(sortIndicesGainLoss[index] < sortIndicesGainLoss[index + 1]){
 
-                temp = SortingGainLoss[index];
-                SortingGainLoss[index] = SortingGainLoss[index + 1];
-                SortingGainLoss[index + 1] = temp;
+                temp = sortIndicesGainLoss[index];
+                sortIndicesGainLoss[index] = sortIndicesGainLoss[index + 1];
+                sortIndicesGainLoss[index + 1] = temp;
 
             }
 
@@ -39,11 +43,12 @@ void Market::sortByGain() {
 
 }
 
-void Market::sortByGain(double ListArray []){
+template <class elemType>
+void Market <elemType>::sortArrayByGain(double arrayList []){
 
     for(int i = 0; i < length; i++){
 
-        SortingGainLoss[i] = list[i].getPercentGain();
+        sortIndicesGainLoss[i] = list[i].getPercentGain();
 
     }
 
@@ -55,11 +60,11 @@ void Market::sortByGain(double ListArray []){
 
         for(index = 0; index < length - i; index++){
 
-            if(SortingGainLoss[index] < SortingGainLoss[index + 1]){
+            if(sortIndicesGainLoss[index] < sortIndicesGainLoss[index + 1]){
 
-                temp = SortingGainLoss[index];
-                SortingGainLoss[index] = SortingGainLoss[index + 1];
-                SortingGainLoss[index + 1] = temp;
+                temp = sortIndicesGainLoss[index];
+                sortIndicesGainLoss[index] = sortIndicesGainLoss[index + 1];
+                sortIndicesGainLoss[index + 1] = temp;
 
             }
         }
@@ -67,13 +72,14 @@ void Market::sortByGain(double ListArray []){
 
     for(i = 0; i < 5; i++){
 
-        ListArray[i] - SortingGainLoss[i];
+        arrayList[i] = sortIndicesGainLoss[i];
 
     }
 
 }
 
-void Market::printByGain() {
+template <class elemType>
+void Market <elemType>::printByGain() {
 
     int i, j;
     int min;
@@ -88,7 +94,7 @@ void Market::printByGain() {
             if(list[j].getPercentGain() < list[min].getPercentGain()){
                 min = j;
             }
-        }`
+        }
 
         temp = list[i];
         list[i] = list[min];

@@ -4,24 +4,25 @@
 
 #include <iostream>
 #include <fstream>
-#include iomanip
+#include <iomanip>
+#include <cassert>
 using namespace std;
 
-void printFinanceReport();
-int displayMenuPrompt();
+void printFinancialReport();
+int printMenuPrompt();
 
 void getGainLossArray( Stock MSET,
                        Stock IBS,
                        Stock CSCO,
                        Stock AOLK,
                        Stock CTR,
-                       double ListArray[] );
+                       double arrayList[] );
 
 int main() {
 
-    int MenuPromptOptions;
-    double ListOfGainLoss[5];
-    Market ListOfStocks (5);
+    int menuPromptOption;
+    double gainLossList[5];
+    Market stockList (5);
     Stock MSET, IBS, CSCO, AOLK, CTR;
 
     ifstream infile ("StockMarketList.txt");
@@ -30,55 +31,57 @@ int main() {
 
         cout << "error text file not found." ;
 
+    }
+
         else{
             infile >> MSET >> IBS >> CSCO >> AOLK >> CTR;
 
-            CSCO.calcPercentGain();
-            IBS.calcPercentGain();
-            MSET.calcPercentGain();
-            AOLK.calcPercentGain();
-            CTR.calcPercentGain();
+            CSCO.calculatePercentageGain();
+            IBS.calculatePercentageGain();
+            MSET.calculatePercentageGain();
+            AOLK.calculatePercentageGain();
+            CTR.calculatePercentageGain();
 
-            ListOfStock.insertAt(CSCO, 0);
-            ListOfStock.insertAt(IBS, 1);
-            ListOfStock.insertAt(MSET, 2);
-            ListOfStock.insertAt(AOLK, 3);
-            ListOfStock.insertAt(CTR, 4);
+            stockList.insertAt(CSCO, 0);
+            stockList.insertAt(IBS, 1);
+            stockList.insertAt(MSET, 2);
+            stockList.insertAt(AOLK, 3);
+            stockList.insertAt(CTR, 4);
 
-            printFinanceReport();
-            ListOfStock.print();
+            printFinancialReport();
+            stockList.print();
 
             do{
 
-                MenuPromptOptions = displayMenuPrompt();
+                menuPromptOption = printMenuPrompt();
 
-                if(MenuPromptOptions == 1) {
+                if(menuPromptOption == 1) {
 
-                    ListOfStock.SortingGainLoss(ListOfGainLoss);
+                    stockList.sortArrayByGain(gainLossList);
 
-                    getGainLossArray(MSET, IBS, CSCO, AOLK, CTR, ListOfGainLoss);
+                    getGainLossArray(MSET, IBS, CSCO, AOLK, CTR, gainLossList);
 
                 }
 
-                if(MenuPromptOptions == 2) {
+                if(menuPromptOption == 2) {
 
-                    printFinanceReport();
-                    ListOfStock.sort();
-                    ListOfStock.print();
+                    printFinancialReport();
+                    stockList.sort();
+                    stockList.print();
                 }
 
 
-            } while(MenuPromptOptions != 3);
+            } while(menuPromptOption != 3);
 
         }
 
-    }
+
 
     return 0;
 
 }
 
-void printFinanceReport() {
+void printFinancialReport() {
 
     cout << "******************************************************************************\n"
          << "******************************************************************************\n\n"
@@ -89,20 +92,20 @@ void printFinanceReport() {
 
 }
 
-int displayMenuPrompt() {
+int printMenuPrompt() {
 
-    int MenuPromptOptions;
+    int menuPromptOption;
 
     do{
 
         cout << "*************MENU*************" << endl;
         cout << endl << "1) Sort By Gain / Loss \n";
         cout << "2) Sort By Symbol \n";
-        cout << "3) Exit \n" << endl';
+        cout << "3) Exit \n" << endl;
 
-        cin >> MenuPromptOptions;
+        cin >> menuPromptOption;
 
-        if(MenuPromptOptions == 0 || MenuPromptOptions > 3) {
+        if(menuPromptOption == 0 || menuPromptOption > 3) {
 
             cout << setw(30) << "***********************" << endl;
             cout << setw(30) << "*        ERROR        *" << endl;
@@ -113,9 +116,9 @@ int displayMenuPrompt() {
 
         }
 
-    } while (MenuPromptOptions == 0 || MenuPromptOptions > 3);
+    } while (menuPromptOption == 0 || menuPromptOption > 3);
 
-    return MenuPromptOptions;
+    return menuPromptOption;
 }
 
 void getGainLossArray(Stock MSET,
@@ -123,36 +126,36 @@ void getGainLossArray(Stock MSET,
                        Stock CSCO,
                        Stock AOLK,
                        Stock CTR,
-                       double ListArray[] )
+                       double arrayList[] )
 {
-       printFinanceReport();
+       printFinancialReport();
 
        int length = 5;
 
        for(int i = 0; i < length; i++){
 
-           if (MSET.getPercentGain() == ListArray[i]){
-               MSET.printStockInfo();
+           if (MSET.getPercentGain() == arrayList[i]){
+               MSET.printStockInformation();
                cout << endl << endl;
            }
 
-           if (IBS.getPercentGain() == ListArray[i]){
-               IBS.printStockInfo();
+           if (IBS.getPercentGain() == arrayList[i]){
+               IBS.printStockInformation();
                cout << endl << endl;
            }
 
-           if (CSCO.getPercentGain() == ListArray[i]){
-               CSC0.printStockInfo();
+           if (CSCO.getPercentGain() == arrayList[i]){
+               CSCO.printStockInformation();
                cout << endl << endl;
            }
 
-           if (AOLK.getPercentGain() == ListArray[i]){
-               AOLK.printStockInfo();
+           if (AOLK.getPercentGain() == arrayList[i]){
+               AOLK.printStockInformation();
                cout << endl << endl;
            }
 
-           if (CTR.getPercentGain() == ListArray[i]){
-               CTR.printStockInfo();
+           if (CTR.getPercentGain() == arrayList[i]){
+               CTR.printStockInformation();
                cout << endl << endl;
            }
 
