@@ -9,33 +9,33 @@ using namespace std;
 
 class Stock {
 
-    friend ostream& operator << {ostream&, const stockType&};
-    friend istream& operator >> {istream&, stockType};
+    friend ostream& operator << (ostream&, const Stock&);
+    friend istream& operator >> (istream&, Stock&);
 
     public:
 
             Stock();
-            void printStockInfo();
-            void displayPrices();
-            void calcPercentGain();
-            void displayVolume();
+            void printStockInformation();
+            void showPrices();
+            void calculatePercentageGain();
+            void showVolume();
             double getPercentGain();
 
-            int operator> {const stockType&} const;
-            int operator< {const stockType&} const;
-            int operator== {const stockType&} const;
-            int operator!= {const stockType&} const;
+            int operator > (const Stock&) const;
+            int operator < (const Stock&) const;
+            int operator == (const Stock&) const;
+            int operator!= (const Stock&) const;
 
 
     private:
             string stockSymbol;
-            double OpeningPrice;
+            double openingPrice;
             int volume;
-            double ClosingPrice;
-            double MaxPrice;
-            double MinPrice;
-            double PrevPrice;
-            double PercentGain;
+            double closingPrice;
+            double highPrice;
+            double lowPrice;
+            double previousPrice;
+            double percentGain;
 
-}
-#endif;
+};
+#endif

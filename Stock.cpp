@@ -1,37 +1,39 @@
 #include "Stock.h"
 #include <iostream>
-#include <string.h>
+#include <cstring>
+#include <fstream>
+#include <cstdlib>
+#include <iomanip>
 
 using namespace std;
 
 //WE INCLUDE INFORMATION ABOUT DAY TO DAY TRANSACTION, GENERAL ACCOUNT INFORMATION
 
 
-ostream& operator << (ostream& os, const stockType& st) {
+ostream& operator << (ostream& os, const Stock& st) {
 
     os << st.stockSymbol << " "
-    << st.OpeningPrice << " "
-    << st.ClosingPrice << " "
-    << st.MaxPrice << " "
-    << st.MinPrice << " "
-    << st.PrevPrice << " "
-    << st.PercentGain << " "
+    << st.openingPrice << " "
+    << st.closingPrice << " "
+    << st.highPrice << " "
+    << st.lowPrice << " "
+    << st.previousPrice << " "
+    << st.percentGain << " "
     << st.volume;
 
 return os;
 
 }
 
-istream& operator << (istream& is, const stockType& st) {
+istream& operator >> (istream& is, Stock& st) {
 
-    is << st.stockSymbol
-    << st.OpeningPrice
-    << st.ClosingPrice
-    << st.MaxPrice
-    << st.MinPrice
-    << st.PrevPrice
-    << st.PercentGain
-    << st.volume;
+    is >> st.stockSymbol
+    >> st.openingPrice
+    >> st.closingPrice
+    >> st.highPrice
+    >> st.lowPrice
+    >> st.previousPrice
+    >> st.volume;
 
 return is;
 
@@ -40,71 +42,71 @@ return is;
 Stock::Stock(){
 
     stockSymbol = " ";
-    OpeningPrice = 0.0;
-    ClosingPrice = 0.0;
-    MaxPrice = 0.0;
-    MinPrice = 0.0;
-    PrevClosing = 0.0;
-    PercentGain = 0.0;
+    openingPrice = 0.0;
+    closingPrice = 0.0;
+    highPrice = 0.0;
+    lowPrice = 0.0;
+    previousPrice = 0.0;
+    percentGain = 0.0;
     volume = 0;
 }
 
-void Stock::printStockInfo(){
+void Stock::printStockInformation(){
 
     cout << fixed << showpoint;
     cout << setprecision(2);
     cout << setw(5) << stockSymbol <<setw(5)
-    << setw(10) << OpeningPrice <<setw(5)
-    << setw(10) << ClosingPrice <<setw(10)
-    << setw(10) << MaxPrice <<setw(10)
-    << setw(10) << MinPrice <<setw(10)
-    << setw(10) << PrevPrice <<setw(10);
+    << setw(10) << openingPrice <<setw(5)
+    << setw(10) << closingPrice <<setw(10)
+    << setw(10) << highPrice <<setw(10)
+    << setw(10) << lowPrice <<setw(10)
+    << setw(10) << previousPrice <<setw(10);
 
-    cout << setprecision(2) << PercentGain << "%" << setw(10);
+    cout << setprecision(2) << percentGain << "%" << setw(10);
     cout << setw(10) << volume;
 
 }
 
-void Stock::displayPrices(){
+void Stock::showPrices(){
 
-    cout << "Opening Price: " << OpeningPrice << endl;
-    cout << "Closing Price: " << ClosingPrice << endl;
-    cout << "Today's Maximum: " << MaxPrice << endl;
-    cout << "Today's Manimum: " << MinPrice << endl;
-    cout << "Previous Closing Price: " << PrevPrice << endl;
-
-}
-
-void Stock::calcPercentGain(){
-
-    PercentGain = (ClosingPrice - OpeningPrice)/OpeningPrice * 100;
+    cout << "Opening Price: " << openingPrice << endl;
+    cout << "Closing Price: " << closingPrice << endl;
+    cout << "Today's Highest: " << highPrice << endl;
+    cout << "Today's Lowest: " << lowPrice << endl;
+    cout << "Previous closing Price: " << previousPrice << endl;
 
 }
 
-void Stock::displayVolume(){
+void Stock::calculatePercentageGain(){
+
+    percentGain = (closingPrice - openingPrice)/openingPrice * 100;
+
+}
+
+void Stock::showVolume(){
 
     cout << "Volume: " << volume << endl;
 }
 
 
-int Stock::operator>(const stockType& st) const {
+int Stock::operator>(const Stock& st) const {
     return (stockSymbol.compare(st.stockSymbol));
 }
 
-int Stock::operator<(const stockType& st) const {
+int Stock::operator<(const Stock& st) const {
     return (stockSymbol.compare(st.stockSymbol));
 }
 
-int Stock::operator==(const stockType& st) const {
+int Stock::operator==(const Stock& st) const {
     return (stockSymbol.compare(st.stockSymbol));
 }
 
-int Stock::operator>(const stockType& st) const {
+int Stock::operator!=(const Stock& st) const {
     return (stockSymbol.compare(st.stockSymbol));
 }
 
 double Stock::getPercentGain(){
-    return PercentGain;
+    return percentGain;
 }
 
 
