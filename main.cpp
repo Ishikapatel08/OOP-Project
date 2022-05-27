@@ -22,7 +22,7 @@ int main() {
 
     int menuPromptOption;
     double gainLossList[5];
-    Market stockList (5);
+
     Stock MSET, IBS, CSCO, AOLK, CTR;
 
     ifstream infile ("StockMarketList.txt");
@@ -42,14 +42,14 @@ int main() {
             AOLK.calculatePercentageGain();
             CTR.calculatePercentageGain();
 
-            stockList.insertAt(CSCO, 0);
-            stockList.insertAt(IBS, 1);
-            stockList.insertAt(MSET, 2);
-            stockList.insertAt(AOLK, 3);
-            stockList.insertAt(CTR, 4);
+            /*StockList.insertAt(CSCO, 0);
+            StockList.insertAt(IBS, 1);
+            StockList.insertAt(MSET, 2);
+            StockList.insertAt(AOLK, 3);
+            StockList.insertAt(CTR, 4);*/
 
             printFinancialReport();
-            stockList.print();
+            //StockList.print();
 
             do{
 
@@ -57,7 +57,7 @@ int main() {
 
                 if(menuPromptOption == 1) {
 
-                    stockList.sortArrayByGain(gainLossList);
+                  //  StockList.sortArrayByGain(gainLossList);
 
                     getGainLossArray(MSET, IBS, CSCO, AOLK, CTR, gainLossList);
 
@@ -66,8 +66,8 @@ int main() {
                 if(menuPromptOption == 2) {
 
                     printFinancialReport();
-                    stockList.sort();
-                    stockList.print();
+                    //StockList.sort();
+                    //StockList.print();
                 }
 
 

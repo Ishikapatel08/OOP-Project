@@ -22,6 +22,7 @@ class Stock {
             void showVolume();
             double getPercentGain();
 
+
             int operator > (const Stock&) const;
             int operator < (const Stock&) const;
             int operator == (const Stock&) const;
@@ -37,6 +38,7 @@ class Stock {
             double lowPrice;
             double previousPrice;
             double percentGain;
+
 
 };
 #endif
