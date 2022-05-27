@@ -9,7 +9,8 @@
 using namespace std;
 
 class Stock {
-
+    
+    //Input and Output operators 
     friend ostream& operator << (ostream&, const Stock&);
     friend istream& operator >> (istream&, Stock&);
 
@@ -22,7 +23,7 @@ class Stock {
             void showVolume();
             double getPercentGain();
 
-
+            //Overloaded operators to easily work with the data provided
             int operator > (const Stock&) const;
             int operator < (const Stock&) const;
             int operator == (const Stock&) const;

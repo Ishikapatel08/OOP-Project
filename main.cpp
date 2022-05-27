@@ -20,27 +20,33 @@ void getGainLossArray( Stock MSET,
 
 int main() {
 
+    //This is the user menu selection
     int menuPromptOption;
+    //To store gain loss percent
     double gainLossList[5];
 
+    // Creat Stock objects
     Stock MSET, IBS, CSCO, AOLK, CTR;
 
+    // Open the stock data file
     ifstream infile ("StockMarketList.txt");
 
+    //Make sure data file is open
     if(!infile){
-
         cout << "error text file not found." ;
 
     }
-
+        //Take in the data from the StockMarketList.txt
         else{
             infile >> MSET >> IBS >> CSCO >> AOLK >> CTR;
 
+            //Calculate percent gain fro each object
             CSCO.calculatePercentageGain();
             IBS.calculatePercentageGain();
             MSET.calculatePercentageGain();
             AOLK.calculatePercentageGain();
             CTR.calculatePercentageGain();
+
 
             /*StockList.insertAt(CSCO, 0);
             StockList.insertAt(IBS, 1);
@@ -48,46 +54,51 @@ int main() {
             StockList.insertAt(AOLK, 3);
             StockList.insertAt(CTR, 4);*/
 
+            //Display the stock Information
+            //Call te stock data header
             printFinancialReport();
             //StockList.print();
 
             do{
 
                 menuPromptOption = printMenuPrompt();
-
                 if(menuPromptOption == 1) {
 
                   //  StockList.sortArrayByGain(gainLossList);
 
+
+                  //This displays the array by percentages Gain
                     getGainLossArray(MSET, IBS, CSCO, AOLK, CTR, gainLossList);
 
                 }
 
                 if(menuPromptOption == 2) {
 
+                    //Call interface header
                     printFinancialReport();
                     //StockList.sort();
                     //StockList.print();
                 }
 
 
+
             } while(menuPromptOption != 3);
 
         }
 
-
-
+    // Terminate program
     return 0;
 
 }
 
 void printFinancialReport() {
 
-    cout << "******************************************************************************\n"
+    //Categories
+    cout << "*******************************EVERDAY TRANSACTION****************************\n"
          << "******************************************************************************\n\n"
          << "STOCK                  TODAY                   PREV       PERCENT             \n"
          << "SYMBOL     OPENING     CLOSING   MAX    MIN    CLOSING    GAIN      VOLUME    \n"
-         << "******************************************************************************\n";
+         << "******************************************************************************\n\n\n";
 
 
 }
@@ -98,6 +109,7 @@ int printMenuPrompt() {
 
     do{
 
+        //Display menu prompt
         cout << "*************MENU*************" << endl;
         cout << endl << "1) Sort By Gain / Loss \n";
         cout << "2) Sort By Symbol \n";

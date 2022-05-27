@@ -5,13 +5,13 @@ project: Market.o StockList.o Stock.o main.cpp
 	g++ main.cpp Market.o StockList.o Stock.o -o project
 
 Market.o: Market.h Market.cpp
-	g++ -c
+	g++ -c Market.cpp
 
 Stock.o: Stock.h Stock.cpp
-	g++ -c
+	g++ -c Stock.cpp
 
 StockList.o: StockList.cpp StockList.h
-	g++ -c
+	g++ -c StockList.cpp
 
 
 

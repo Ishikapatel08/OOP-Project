@@ -39,6 +39,7 @@ return is;
 
 }
 
+//Comstructor which initialises the values for the variables
 Stock::Stock(){
 
     stockSymbol = " ";
@@ -51,6 +52,7 @@ Stock::Stock(){
     volume = 0;
 }
 
+//Fized precision and width to make printing more organised
 void Stock::printStockInformation(){
 
     cout << fixed << showpoint;
@@ -67,6 +69,7 @@ void Stock::printStockInformation(){
 
 }
 
+//Printing out the prices of the transaction
 void Stock::showPrices(){
 
     cout << "Opening Price: " << openingPrice << endl;
@@ -77,12 +80,14 @@ void Stock::showPrices(){
 
 }
 
+//To calculate the percentage gain over the course of the day
 void Stock::calculatePercentageGain(){
 
     percentGain = (closingPrice - openingPrice)/openingPrice * 100;
 
 }
 
+//Printing / Displaying
 void Stock::showVolume(){
 
     cout << "Volume: " << volume << endl;
